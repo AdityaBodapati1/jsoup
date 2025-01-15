@@ -19,7 +19,7 @@ public class petFoodAd {
             // Print usernames and messages
             System.out.println("Potential customers:");
             for (String[] user : targetUsers) {
-                System.out.println("Username: " + user[0] + ", We bet your furry friend would love to smell our pet food!");
+                System.out.println(user[0] + ", We bet your furry friend would love to smell our pet food!");
             }
 
             // Write to output file
