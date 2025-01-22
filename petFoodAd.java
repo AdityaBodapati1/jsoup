@@ -19,7 +19,7 @@ public class petFoodAd {
             // Print usernames and messages
             System.out.println("Potential customers:");
             for (String[] user : targetUsers) {
-                System.out.println(user[0] + ", We bet your furry friend would love to smell our pet food!");
+                System.out.println(user[0] + user[2]);
             }
 
             // Write to output file
@@ -49,14 +49,22 @@ public class petFoodAd {
             if (parts.length == 2) {
                 String username = parts[0].trim();
                 String message = parts[1].trim().toLowerCase();
+                String currMessage = ", We bet your furry friend would love to smell our pet food!";
                 for (String word : targetWords) {
                     if (message.contains(word.toLowerCase())) {
-                        targetUsers.add(new String[] { username, parts[1].trim() });
+                        if (message.contains(word.toLowerCase())) {
+                            if (word.equalsIgnoreCase("dog") || word.equalsIgnoreCase("dogs")) {
+                                currMessage = ", Our dog food is packed with protein and rich flavors that will have tails wagging with every bite.";
+                            } else if (word.equalsIgnoreCase("cat") || word.equalsIgnoreCase("cats") || word.equalsIgnoreCase("kitty")) {
+                                currMessage = ", Your feline friend deserves the best! Our cat food is carefully crafted with savory ingredients to satisfy even the pickiest of eaters.";
+                            }
+                        targetUsers.add(new String[] { username, parts[1].trim(), currMessage });
                         break;
                     }
                 }
             }
         }
+    }
         return targetUsers;
     }
 
@@ -67,7 +75,7 @@ public class petFoodAd {
             for (String[] user : targetUsers) {
                 bw.write("Username: " + user[0] + ", Message: " + user[1]);
                 bw.newLine();
-                bw.write(user[0] + ", We bet your furry friend would love to smell our pet food!");
+                bw.write(user[0] + user[2]);
                 bw.newLine();
             }
         }
